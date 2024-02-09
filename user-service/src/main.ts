@@ -1,5 +1,6 @@
 import { Login } from "./application/user-cases/Login";
 import { Register } from "./application/user-cases/Register";
+import init from "./infrastructure/database/setup";
 import { UserRepository } from "./infrastructure/repositories/UserRepository";
 import { Server } from "./presentation/Server";
 import { LoginController } from "./presentation/controllers/Logincontroller";
@@ -7,6 +8,8 @@ import { RegisterController } from "./presentation/controllers/RegisterControlle
 
 
 const main = async () => {
+
+    await init();
 
     const userRepo = new UserRepository();
 
