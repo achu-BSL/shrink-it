@@ -1,6 +1,7 @@
 import express from "express";
 import { CreateShrinkurlController } from "./controllers/CreateShrinkurlController";
 import { RetriveShrinkurlsController } from "./controllers/RetriveShrinkurlsController";
+import { authMiddleware } from "./middlewares/authMiddleware";
 
 const app = express();
 
@@ -11,8 +12,8 @@ export class Server {
     retriveShrinkurlsController: RetriveShrinkurlsController,
   ) {
     app.use(express.json(), express.urlencoded({ extended: true }));
-
-
+    app.use(authMiddleware);
+    
     app.get("/shrinkurl", (req, res) => {
       retriveShrinkurlsController.handle(req, res);
     });
