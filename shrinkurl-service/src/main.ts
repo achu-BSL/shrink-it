@@ -1,9 +1,11 @@
 import { CreateShrinkurl } from "./application/use-cases/CreateShrinkurl";
+import { RetriveShrinkUrl } from "./application/use-cases/RetriveShrinkUrl";
 import { RetriveShrinkurls } from "./application/use-cases/RetriveShrinkurls";
 import init from "./infrastructure/database/setup";
 import { ShrinkurlRepository } from "./infrastructure/repositories/ShrinkUrlRepository";
 import { Server } from "./presentaion/Server";
 import { CreateShrinkurlController } from "./presentaion/controllers/CreateShrinkurlController";
+import { NavigateShrinkurlController } from "./presentaion/controllers/NavigateShrinkurlController";
 import { RetriveShrinkurlsController } from "./presentaion/controllers/RetriveShrinkurlsController";
 
 const main = async () => {
@@ -13,6 +15,7 @@ const main = async () => {
 
   const createShrinkurl = new CreateShrinkurl(shrinkurlRepo);
   const retriveShrinkurls = new RetriveShrinkurls(shrinkurlRepo);
+  const retriveShrinkUrl = new RetriveShrinkUrl(shrinkurlRepo);
 
   const createShrinkurlController = new CreateShrinkurlController(
     createShrinkurl
@@ -20,12 +23,15 @@ const main = async () => {
   const retriveShrinkurlsController = new RetriveShrinkurlsController(
     retriveShrinkurls
   );
-
+  const navigateShrinkurlController = new NavigateShrinkurlController(
+    retriveShrinkUrl
+  );
 
   Server.run(
     3001,
     createShrinkurlController,
     retriveShrinkurlsController,
+    navigateShrinkurlController
   );
 };
 
