@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shrinkurl-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shrinkurl-mongo
+  template:
+    metadata:
+      labels:
+        app: shrinkurl-mongo
+    spec:
+      containers:
+        - name: shrinkurl-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shrinkurl-mongo-srv
+spec:
+  selector:
+    app: shrinkurl-mongo
+  ports:
+    - name: shrinkurl-mongo
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+  
