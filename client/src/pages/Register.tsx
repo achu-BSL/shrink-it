@@ -14,7 +14,7 @@ const Register = () => {
             password: formData.get('password'),
         }
         
-        const res = await fetch('url', {
+        const res = await fetch('http://192.168.49.2:31500/api/user/register', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
