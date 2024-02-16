@@ -1,3 +1,4 @@
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Route, Routes } from "react-router-dom";
@@ -9,7 +10,7 @@ const App = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<ProtectedRoute />}>
-        {/** Home Route */}
+        <Route index element={<Home />} />
       </Route>
     </Routes>
   );
