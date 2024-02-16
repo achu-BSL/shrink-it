@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import { FormEvent } from "react";
+import { useUserStore } from "../store/useUserStore";
 
 const Login = () => {
+  const updateUser = useUserStore((state) => state.updateUser);
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -14,7 +16,7 @@ const Login = () => {
       password: formData.get("password"),
     };
 
-    const res = await fetch("url", {
+    const res = await fetch("http://192.168.49.2:31500/api/user/login", {
       method: "POST",
       body: JSON.stringify(body),
       credentials: "include",
@@ -29,7 +31,8 @@ const Login = () => {
         token,
         user: { username },
       } = (await res.json()) as { token: string; user: { username: string } };
-      console.log(token, username);
+      console.log(token);
+      updateUser({ token, username });
     } else {
       console.log('Login failed');
     }
