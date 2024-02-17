@@ -9,6 +9,10 @@ export default {
       colors: {
         primary: '#4ECDC4',
         secondary: '#FFE1AB'
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        roboto: ["Roboto", "sans, seriv"],
       }
     },
   },
