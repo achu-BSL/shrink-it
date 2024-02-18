@@ -10,7 +10,6 @@ const Register = () => {
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    toast.error("OOPS Something went wrong");
 
     const formData = new FormData(e.currentTarget);
     const body = {
