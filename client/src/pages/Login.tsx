@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { FormEvent } from "react";
 import { useUserStore } from "../store/useUserStore";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const updateUser = useUserStore((state) => state.updateUser);
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -31,10 +34,16 @@ const Login = () => {
         token,
         user: { username },
       } = (await res.json()) as { token: string; user: { username: string } };
-      console.log(token);
       updateUser({ token, username });
+
+      toast.success("Login Successfully");
+      navigate("/");
     } else {
-      console.log('Login failed');
+      let msg = "OPPS Something Went Wrong!";
+      if (res.status === 400) {
+        msg = "Invalid Username or Password";
+      }
+      toast.error(msg);
     }
   };
 
