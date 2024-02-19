@@ -6,7 +6,7 @@ export const validateUsername = (username: string) => {
 };
 
 export const validatePassword = (password: string) => {
-  if (password) return Error("Password can't be empty");
+  if (!password) return Error("Password can't be empty");
   if (password.length < 5) return Error("Password should be more than 4");
 
   return true;
