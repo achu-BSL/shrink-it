@@ -1,42 +1,10 @@
-import { FormEvent } from "react";
 import Input from "../components/Input";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import toast from "react-hot-toast";
+import { useRegisterForm } from "../hooks/useRegisterForm";
 
 const Register = () => {
-  const navigate = useNavigate();
-
-  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-
-    const formData = new FormData(e.currentTarget);
-    const body = {
-      username: formData.get("username"),
-      password: formData.get("password"),
-    };
-
-    const res = await fetch("http://192.168.49.2:31500/api/user/register", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (res.ok) {
-      toast.success("Register successfully");
-      navigate("/login");
-    } else {
-      let msg = "OOPS Something went wrong!";
-      if (res.status === 400) {
-        msg = "Username already taken";
-      }
-
-      toast.error(msg);
-    }
-  };
+  const { submitHandler } = useRegisterForm();
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-slate-200 ">
