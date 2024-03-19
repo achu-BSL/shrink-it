@@ -28,7 +28,7 @@ const main = async () => {
   );
 
   Server.run(
-    3001,
+    3003,
     createShrinkurlController,
     retriveShrinkurlsController,
     navigateShrinkurlController

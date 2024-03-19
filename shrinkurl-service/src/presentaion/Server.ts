@@ -3,6 +3,7 @@ import { CreateShrinkurlController } from "./controllers/CreateShrinkurlControll
 import { RetriveShrinkurlsController } from "./controllers/RetriveShrinkurlsController";
 import { authMiddleware } from "./middlewares/authMiddleware";
 import { NavigateShrinkurlController } from "./controllers/NavigateShrinkurlController";
+import cors from "cors";
 
 const app = express();
 
@@ -13,24 +14,31 @@ export class Server {
     retriveShrinkurlsController: RetriveShrinkurlsController,
     navigateShrinkurlController: NavigateShrinkurlController
   ) {
-    app.use(express.json(), express.urlencoded({ extended: true }));
+    app.use(cors({ origin: "http://localhost:5173" }));
 
-    app.get("/shrinkurl/:shrinkUrlId", (req, res) => {
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+
+    app.get("/test", (req, res) => {
+      res.send({ msg: `Server is running on port ${port}` });
+    });
+
+    app.get("/:shrinkUrlId", (req, res) => {
       navigateShrinkurlController.handle(req, res);
     });
 
     app.use(authMiddleware);
-    
-    app.get("/shrinkurl", (req, res) => {
+
+    app.get("/", (req, res) => {
       retriveShrinkurlsController.handle(req, res);
     });
 
-    app.post("/shrinkurl", (req, res) => {
+    app.post("/", (req, res) => {
       createShrinkurlController.handle(req, res);
     });
 
     app.listen(port, () => {
-      console.log(`[shrinkurl-service]: Server running on port ${port}`);
+      console.log(`[shrinkurl-service]: Server running on port..... ${port}`);
     });
   }
 }
