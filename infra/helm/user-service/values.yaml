@@ -1,0 +1,23 @@
+replicaCount: 1
+
+deployment:
+  name: user
+  podName: user
+
+image:
+  repository: achubsl/shrink-it-user
+  pullPolicy: Always
+
+
+service:
+  type: ClusterIP
+  port: 80
+  name: user-srv
+
+ingress:
+  name: ingress-usr
+  host: shrinkit.dev
+  
+ 
+
+
