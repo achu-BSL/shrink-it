@@ -20,6 +20,7 @@ const config: Config = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         roboto: ["Roboto", "sans, seriv"],
+        lora: ["Lora", "serif"]
       }
     },
   },
