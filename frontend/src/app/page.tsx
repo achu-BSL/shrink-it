@@ -23,10 +23,10 @@ function Home() {
       <div className="flex justify-center px-12 h-24 bg-primary">
         <div className="flex-1 flex justify-between h-full items-center max-w-[1380px]">
           <div>
-            <h1 className="text-xl font-semibold ">Shrink It</h1>
+            <h1 className="text-xl font-semibold font-lora">Shrink-It</h1>
           </div>
           <div>
-            <button onClick={logoutHandler} className="font-poppins">
+            <button onClick={logoutHandler} className="font-poppins font-medium hover:opacity-45">
               Logout
             </button>
           </div>
@@ -38,7 +38,7 @@ function Home() {
 
         <div className="w-full max-w-[1380px] h-screen">
           <div className="py-4">
-            <h6 className="text-xl font-roboto font-semibold">Shrinked URLs</h6>
+            <h6 className="text-xl font-poppins font-semibold">Shrinked URLs</h6>
           </div>
           <div className="flex flex-col gap-2">
             {isFetching ? (
@@ -52,7 +52,7 @@ function Home() {
                   >
                     <div className="flex-1">
                       <p className="font-poppins">{url.actualUrl}</p>
-                      <p className="font-poppins">
+                      <p className="font-poppins text-primary">
                         {`${process.env.NEXT_PUBLIC_SERVER}/shrinkurl/${url.shrinkUrlId}`}
                       </p>
                     </div>
