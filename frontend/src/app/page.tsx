@@ -1,8 +1,10 @@
-"use client"
+"use client";
 import { FaRegCopy } from "react-icons/fa";
 import { BarLoader } from "react-spinners";
 import { useShrinkUrl } from "../hooks/useShrinkUrl";
 import { isAuth } from "../components/isAuth";
+import { noData } from "../assets";
+import Background from "../components/Background";
 
 export default isAuth(Home);
 
@@ -19,14 +21,18 @@ function Home() {
   } = useShrinkUrl();
 
   return (
-    <div className="min-h-screen bg-slate-200">
+    <div className="min-h-screen h-full bg-primary/20">
+      <Background />
       <div className="flex justify-center px-12 h-24 bg-primary">
         <div className="flex-1 flex justify-between h-full items-center max-w-[1380px]">
           <div>
             <h1 className="text-xl font-semibold font-lora">Shrink-It</h1>
           </div>
           <div>
-            <button onClick={logoutHandler} className="font-poppins font-medium hover:opacity-45">
+            <button
+              onClick={logoutHandler}
+              className="font-poppins font-medium hover:opacity-45"
+            >
               Logout
             </button>
           </div>
@@ -34,15 +40,17 @@ function Home() {
       </div>
 
       <div className="flex justify-center w-full px-12">
-        <div className="absolute bg-purple-400 rounded-full w-32 h-32 top-28 -left-8 filter blur-2xl opacity-80"></div>
-
-        <div className="w-full max-w-[1380px] h-screen">
-          <div className="py-4">
-            <h6 className="text-xl font-poppins font-semibold">Shrinked URLs</h6>
+        <div className="w-full max-w-[1380px] ">
+          <div className="pt-12 pb-6">
+            <h6 className="text-2xl font-poppins font-semibold tracking-tight">
+              Shrinked URLs
+            </h6>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 mb-20">
             {isFetching ? (
               <BarLoader />
+            ) : urlState.length === 0 ? (
+              <img className="self-center w-[300px]" src={noData.src} alt="" />
             ) : (
               <>
                 {urlState.map((url) => (
